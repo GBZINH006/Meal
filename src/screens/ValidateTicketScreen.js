@@ -34,7 +34,7 @@ export default function ValidateTicketScreen() {
       <TextInput style={global.input} placeholder="12345" value={matricula} onChangeText={setMatricula} keyboardType="number-pad" />
       <RedButton title="Verificar" onPress={checkTicket} />
       {ticket && (
-        <View style={{ marginTop: 16 }}>
+        <View style={{ marginTop: 16 }} >
           <Text style={global.label}>Nome: {ticket.nome}</Text>
           <Text style={global.label}>Matrícula: {ticket.matricula}</Text>
           <Text style={global.label}>Turma: {ticket.turma ?? "-"}</Text>

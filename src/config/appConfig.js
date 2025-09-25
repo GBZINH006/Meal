@@ -13,7 +13,7 @@ export default {
     {
       id: "escola_principal",
       name: "Escola (local fornecido)",
-      coords: { latitude: -27.618398, longitude: -48.662856 },
+      coords: { latitude: -27.618398, longitude: -48.662856},
       radiusMeters: 150
     }
   ],

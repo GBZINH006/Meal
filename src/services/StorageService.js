@@ -78,7 +78,7 @@ export default {
     try {
       const turmas = Array.isArray(config.turmas) ? config.turmas : [];
       return turmas.find(t => String(t.id) === String(id)) || null;
-    } catch (err) {
+    } catch (err){
       console.warn("StorageService.getTurmaById error:", err);
       return null;
     }

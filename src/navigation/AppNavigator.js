@@ -33,7 +33,7 @@ function AlunoTabs() {
     <Tab.Navigator screenOptions={({ route }) => ({
       headerShown: false,
       tabBarActiveTintColor: config.primaryColor,
-      tabBarIcon: ({ focused, color, size }) => {
+      tabBarIcon: ({ focused, color, size }) =>{
         if (route.name === "Receber") return <IconWithBounce name="receipt-outline" focused={focused} color={color} size={size} />;
         if (route.name === "Localização") return <IconWithBounce name="location-outline" focused={focused} color={color} size={size} />;
         if (route.name === "Mapa") return <IconWithBounce name="map-outline" focused={focused} color={color} size={size} />;

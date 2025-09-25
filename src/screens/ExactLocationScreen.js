@@ -4,7 +4,7 @@ import { View, Text } from "react-native";
 import global from "../styles/global";
 import * as Location from "expo-location";
 
-export default function ExactLocationScreen() {
+export default function ExactLocationScreen(){
   const [coords, setCoords] = useState(null);
 
   useEffect(() => {

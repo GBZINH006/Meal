@@ -39,7 +39,7 @@ export default function Confetti({ show = false, count = 20, onComplete }) {
 
   return (
     <View pointerEvents="none" style={{ position: "absolute", left: 0, top: 0, width, height }}>
-      {pieces.map((p, i) => {
+      {pieces.map((p, i) =>{
         const translateY = p.fall;
         const translateX = p.fall.interpolate({ inputRange: [0, height], outputRange: [0, Math.random() * 40 - 20] });
         const rotate = p.rotate.interpolate({ inputRange: [0, 360], outputRange: ["0deg", "360deg"] });

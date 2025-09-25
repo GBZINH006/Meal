@@ -42,7 +42,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} style={[global.container, { justifyContent: "flex-start" }]}>
-      <ScrollView contentContainerStyle={{ paddingBottom: 40 }}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 40}}>
         <Text style={global.title}>Login</Text>
 
         <View style={{ flexDirection: "row", marginBottom: 16 }}>

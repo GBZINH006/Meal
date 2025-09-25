@@ -33,7 +33,7 @@ export default function IntervalScreen() {
         const active = intervalStart ? now >= intervalStart && now < intervalEnd : false;
         const remainingStart = intervalStart ? intervalStart - now : 0;
         const remainingEnd = intervalEnd ? intervalEnd - now : 0;
-        function formatMs(ms) {
+        function formatMs(ms){
           if (ms <= 0) return "00:00:00";
           const s = Math.floor(ms/1000)%60;
           const m = Math.floor(ms/60000)%60;

@@ -11,7 +11,7 @@ export default function LocationScreen() {
   const [coords, setCoords] = useState(null);
   const [inside, setInside] = useState(false);
 
-  async function enableLocation() {
+  async function enableLocation(){
     const { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
       Alert.alert("Permissão negada");

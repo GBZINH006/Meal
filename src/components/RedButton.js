@@ -23,5 +23,5 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   text: { color: "#fff", fontWeight: "700" },
-  disabled: { backgroundColor: "#e0a6a6" }
+  disabled: { backgroundColor: "#e0a6a6"}
 });

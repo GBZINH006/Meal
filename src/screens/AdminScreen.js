@@ -7,7 +7,7 @@ import StorageService from "../services/StorageService";
 
 function todayISO() { return new Date().toISOString().slice(0,10); }
 
-export default function AdminScreen() {
+export default function AdminScreen(){
   const [nome, setNome] = useState("");
   const [matricula, setMatricula] = useState("");
   const [turmaSelecionada, setTurmaSelecionada] = useState("");

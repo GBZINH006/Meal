@@ -66,7 +66,7 @@ export default function ReceiveTicketScreen({ navigation }) {
     }
   }
 
-  async function scheduleIntervalEndNotification(intervalEndDate) {
+  async function scheduleIntervalEndNotification(intervalEndDate){
     try {
       const ok = await ensureNotificationPermission();
       if (!ok) {

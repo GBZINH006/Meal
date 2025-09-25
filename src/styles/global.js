@@ -46,5 +46,5 @@ export default StyleSheet.create({
   badgeGreen: { backgroundColor: "#2e7d32", color: "#fff" },
   spacerSmall: { height: 8 },
   spacer: { height: 16 },
-  spacerLarge: { height: 24 }
+  spacerLarge: { height: 24}
 });

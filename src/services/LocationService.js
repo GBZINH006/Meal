@@ -28,7 +28,7 @@ export function distanceMeters(lat1, lon1, lat2, lon2) {
 export function findNearestInstitution(userCoords, institutions = []) {
   if (!userCoords || !Array.isArray(institutions) || institutions.length === 0) return null;
   let best = null;
-  for (const inst of institutions) {
+  for (const inst of institutions){
     if (!inst || !inst.coords) continue;
     const d = distanceMeters(userCoords.latitude, userCoords.longitude, inst.coords.latitude, inst.coords.longitude);
     if (!best || d < best.distance) best = { institution: inst, distance: d };

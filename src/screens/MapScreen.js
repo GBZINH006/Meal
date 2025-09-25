@@ -202,7 +202,7 @@ export default function MapScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  checkButton: { flexDirection: "row", alignItems: "center", justifyContent: "center", padding: 12, borderRadius: 10 },
+  checkButton: {flexDirection: "row", alignItems: "center", justifyContent: "center", padding: 12, borderRadius: 10 },
   infoCard: { marginTop: 12, padding: 12, borderRadius: 10, backgroundColor: "#fff", elevation: 4 },
   smallBtn: { paddingVertical: 10, paddingHorizontal: 12, borderRadius: 8, alignItems: "center", justifyContent: "center" }
 });

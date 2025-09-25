@@ -3,7 +3,7 @@ import React, { createContext, useState } from "react";
 
 export const AuthContext = createContext();
 
-export function AuthProvider({ children }) {
+export function AuthProvider({ children }){
   const [user, setUser] = useState(null);
   const [location, setLocation] = useState({ coords: null, insideSchool: false, distanceMeters: null, institution: null });
   return (
