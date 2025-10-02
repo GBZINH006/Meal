@@ -1,90 +1,89 @@
 // src/services/StorageService.js
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import config from "../config/appConfig";
 
-const KEYS = {
-  ALUNOS: "@app:alunos",
-  TICKETS: "@app:tickets",
-  ADM: "@app:adm"
-};
+const KEY_ALUNOS = "@mealv:alunos";
+const KEY_ADM = "@mealv:adm";
 
-async function read(key) {
-  const s = await AsyncStorage.getItem(key);
-  return s ? JSON.parse(s) : null;
-}
-async function write(key, value) {
-  await AsyncStorage.setItem(key, JSON.stringify(value));
-}
-
-export default {
-  async getAlunos() {
-    return (await read(KEYS.ALUNOS)) || [];
-  },
-  async addAluno(aluno) {
-    const list = await this.getAlunos();
-    if (list.find(a => String(a.matricula) === String(aluno.matricula))) throw new Error("Matrícula já cadastrada");
-    list.push(aluno);
-    await write(KEYS.ALUNOS, list);
-    return aluno;
-  },
-  async getAlunoByMatricula(matricula) {
-    const list = await this.getAlunos();
-    return list.find(a => String(a.matricula) === String(matricula)) || null;
-  },
-
-  async getTickets() {
-    return (await read(KEYS.TICKETS)) || [];
-  },
-  async addTicket(ticket) {
-    const list = await this.getTickets();
-    if (list.find(t => t.idTicket === ticket.idTicket)) throw new Error("Ticket já existe");
-    list.push(ticket);
-    await write(KEYS.TICKETS, list);
-    return ticket;
-  },
-  async updateTicket(updated) {
-    const list = await this.getTickets();
-    const next = list.map(t => (t.idTicket === updated.idTicket ? updated : t));
-    await write(KEYS.TICKETS, next);
-    return updated;
-  },
-  async getTicketsByDate(dateISO) {
-    const all = await this.getTickets();
-    return all.filter(t => t.dateISO === dateISO);
-  },
-  async getTicketForMatriculaOnDate(matricula, dateISO) {
-    const all = await this.getTickets();
-    return all.find(t => String(t.matricula) === String(matricula) && t.dateISO === dateISO) || null;
-  },
-  async resetTicketsForDate(dateISO) {
-    const all = await this.getTickets();
-    const next = all.filter(t => t.dateISO !== dateISO);
-    await write(KEYS.TICKETS, next);
-    return next;
-  },
-
-  async getAdm() {
-    return (await read(KEYS.ADM)) || { password: "admin123" };
-  },
-  async setAdm(adm) {
-    await write(KEYS.ADM, adm);
-    return adm;
-  },
-
-  getTurmas() {
-    return Array.isArray(config.turmas) ? config.turmas : [];
-  },
-  getTurmaById(id) {
+const StorageService = {
+  async getAllAlunos() {
     try {
-      const turmas = Array.isArray(config.turmas) ? config.turmas : [];
-      return turmas.find(t => String(t.id) === String(id)) || null;
-    } catch (err){
-      console.warn("StorageService.getTurmaById error:", err);
+      const raw = await AsyncStorage.getItem(KEY_ALUNOS);
+      return raw ? JSON.parse(raw) : [];
+    } catch (err) {
+      console.error("StorageService.getAllAlunos", err);
+      return [];
+    }
+  },
+
+  async saveAlunos(list = []) {
+    try {
+      await AsyncStorage.setItem(KEY_ALUNOS, JSON.stringify(list));
+      return true;
+    } catch (err) {
+      console.error("StorageService.saveAlunos", err);
+      throw err;
+    }
+  },
+
+  async getAlunoByMatricula(matricula) {
+    try {
+      const list = await StorageService.getAllAlunos();
+      return list.find(a => String(a.matricula) === String(matricula)) || null;
+    } catch (err) {
+      console.error("StorageService.getAlunoByMatricula", err);
       return null;
     }
   },
 
-  async clearAll() {
-    await AsyncStorage.clear();
-  }
+  async updateAluno(updatedAluno) {
+    try {
+      const list = await StorageService.getAllAlunos();
+      const idx = list.findIndex(a => String(a.matricula) === String(updatedAluno.matricula));
+      if (idx >= 0) list[idx] = updatedAluno;
+      else list.push(updatedAluno);
+      await StorageService.saveAlunos(list);
+      return updatedAluno;
+    } catch (err) {
+      console.error("StorageService.updateAluno", err);
+      throw err;
+    }
+  },
+
+  async getAdm() {
+    try {
+      const raw = await AsyncStorage.getItem(KEY_ADM);
+      return raw ? JSON.parse(raw) : { password: "admin123" };
+    } catch (err) {
+      console.error("StorageService.getAdm", err);
+      return { password: "admin123" };
+    }
+  },
+
+  async validateTicket(code) {
+    try {
+      const list = await StorageService.getAllAlunos();
+      const found = list.find(a => a.ticketCode === code);
+      if (!found) return { ok: false, reason: "Ticket não encontrado" };
+      return { ok: true, aluno: found };
+    } catch (err) {
+      console.error("StorageService.validateTicket", err);
+      return { ok: false, reason: "Erro ao validar" };
+    }
+  },
+
+  async markTicketUsed(matricula, code) {
+    try {
+      const aluno = await StorageService.getAlunoByMatricula(matricula);
+      if (!aluno) return null;
+      if (aluno.ticketCode !== code) return null;
+      const updated = { ...aluno, ticketStatus: "usado" };
+      await StorageService.updateAluno(updated);
+      return updated;
+    } catch (err) {
+      console.error("StorageService.markTicketUsed", err);
+      return null;
+    }
+  },
 };
+
+export default StorageService;

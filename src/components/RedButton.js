@@ -1,27 +1,12 @@
 // src/components/RedButton.js
 import React from "react";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
-import config from "../config/appConfig";
+import { TouchableOpacity, Text } from "react-native";
+import global from "../styles/global";
 
-export default function RedButton({ title, onPress, style, disabled }) {
+export default function RedButton({ title, onPress, disabled, style }) {
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={[styles.button, style, disabled && styles.disabled]}
-      disabled={disabled}
-    >
-      <Text style={styles.text}>{title}</Text>
+    <TouchableOpacity onPress={onPress} disabled={disabled} style={[global.button, style, disabled && { opacity: 0.6 }]}>
+      <Text style={global.buttonText}>{title}</Text>
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: config.primaryColor,
-    padding: 12,
-    borderRadius: 10,
-    alignItems: "center"
-  },
-  text: { color: "#fff", fontWeight: "700" },
-  disabled: { backgroundColor: "#e0a6a6"}
-});

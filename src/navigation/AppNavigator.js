@@ -14,6 +14,7 @@ import MapScreen from "../screens/MapScreen";
 import ValidateTicketScreen from "../screens/ValidateTicketScreen";
 import IntervalScreen from "../screens/IntervalScreen";
 import AdminScreen from "../screens/AdminScreen";
+import StudentCardScreen from "../screens/StudentCardScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -52,12 +53,19 @@ function AlunoTabs() {
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: true }}>
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Aluno" component={AlunoTabs} options={{ headerShown: false }} />
-        <Stack.Screen name="Validar" component={ValidateTicketScreen} />
-        <Stack.Screen name="ADM" component={AdminScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="Splash" component={SplashScreen} />
+    <Stack.Screen name="Login" component={LoginScreen} />
+    <Stack.Screen name="Admin" component={AdminScreen} />
+    <Stack.Screen name="Student" component={StudentScreen} />
+    <Stack.Screen name="Location" component={LocationScreen} />
+    <Stack.Screen name="Interval" component={IntervalScreen} />
+    <Stack.Screen name="Ticket" component={TicketScreen} />
+    <Stack.Screen name="Validate" component={ValidateScreen} />
+    <Stack.Screen name="CartaoAluno" component={StudentCardScreen} />
+  </Stack.Navigator>
+</NavigationContainer>
+
+
   );
 }

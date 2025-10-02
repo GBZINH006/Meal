@@ -1,50 +1,183 @@
 // src/styles/global.js
-import { StyleSheet } from "react-native";
-import config from "../config/appConfig";
+import { StyleSheet, Platform } from "react-native";
 
 export default StyleSheet.create({
+  // Container padrão para telas
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: "#fff"
+    backgroundColor: "#F7F7FA",
+    padding: 20,
+    paddingTop: Platform.OS === "ios" ? 60 : 20,
   },
-  center: { alignItems: "center", justifyContent: "center" },
-  title: { fontSize: 22, fontWeight: "700", color: "#222", marginBottom: 12 },
-  subtitle: { fontSize: 18, fontWeight: "600", color: "#333", marginBottom: 8 },
-  label: { fontSize: 14, color: "#333", marginBottom: 6 },
-  small: { fontSize: 12, color: "#666" },
-  redText: { color: config.primaryColor, fontWeight: "700" },
-  input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 10,
-    borderRadius: 8,
+
+  // Textos principais
+  title: {
+    fontSize: 28,
+    fontWeight: "700",
+    color: "#222",
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: "#555",
+    marginBottom: 18,
+  },
+  muted: {
+    fontSize: 14,
+    color: "#666",
     marginBottom: 12,
-    backgroundColor: "#fff"
   },
+
+  // Labels e pequenas instruções
+  label: {
+    fontSize: 14,
+    color: "#333",
+    marginBottom: 6,
+  },
+  redText: {
+    color: "#FF5A5F",
+    fontWeight: "700",
+  },
+
+  // Inputs
+  input: {
+    height: 48,
+    borderRadius: 10,
+    backgroundColor: "#FFF",
+    paddingHorizontal: 12,
+    fontSize: 16,
+    color: "#222",
+    borderWidth: 1,
+    borderColor: "#E6E6EA",
+    marginBottom: 12,
+  },
+  inputSmall: {
+    height: 40,
+    borderRadius: 8,
+    backgroundColor: "#FFF",
+    paddingHorizontal: 10,
+    fontSize: 14,
+    color: "#222",
+    borderWidth: 1,
+    borderColor: "#E6E6EA",
+  },
+
+  // Botões principais (vermelho)
+  button: {
+    height: 50,
+    backgroundColor: "#FF5A5F",
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 12,
+    shadowColor: "#FF5A5F",
+    shadowOpacity: 0.12,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 3,
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "700",
+    fontSize: 16,
+  },
+
+  // Botões secundários
+  buttonOutline: {
+    height: 48,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#DDD",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#FFF",
+    marginTop: 10,
+  },
+  buttonOutlineText: {
+    color: "#333",
+    fontSize: 15,
+    fontWeight: "600",
+  },
+
+  // Cards e lists
   card: {
-    padding: 12,
-    borderRadius: 10,
     backgroundColor: "#fff",
-    elevation: 2,
+    borderRadius: 12,
+    padding: 14,
+    marginBottom: 12,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    marginBottom: 12
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 2,
   },
-  buttonPrimary: {
-    backgroundColor: config.primaryColor,
-    padding: 12,
-    borderRadius: 10,
-    alignItems: "center"
+  cardTitle: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#222",
   },
-  buttonPrimaryText: { color: "#fff", fontWeight: "700" },
-  buttonDisabled: { backgroundColor: "#e0a6a6" },
-  badge: { paddingVertical: 4, paddingHorizontal: 8, borderRadius: 8, alignSelf: "flex-start" },
-  badgeRed: { backgroundColor: config.primaryColor, color: "#fff" },
-  badgeGreen: { backgroundColor: "#2e7d32", color: "#fff" },
-  spacerSmall: { height: 8 },
-  spacer: { height: 16 },
-  spacerLarge: { height: 24}
+  listRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 10,
+  },
+
+  // Avatares / imagens
+  avatarSmall: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "#EEE",
+  },
+  avatarLarge: {
+    width: 96,
+    height: 96,
+    borderRadius: 48,
+    backgroundColor: "#EEE",
+  },
+
+  // Tipos de texto utilitários
+  hint: {
+    fontSize: 12,
+    color: "#999",
+  },
+  errorText: {
+    fontSize: 13,
+    color: "#D44",
+    marginTop: 6,
+  },
+
+  // Layout helpers
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  center: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  // Footer / small actions
+  footerText: {
+    fontSize: 13,
+    color: "#777",
+    textAlign: "center",
+    marginTop: 18,
+  },
+
+  // Small chips / badges
+  badge: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+    backgroundColor: "#FFF5F5",
+    borderWidth: 1,
+    borderColor: "#FFD7D7",
+  },
+  badgeText: {
+    color: "#FF5A5F",
+    fontSize: 12,
+    fontWeight: "700",
+  },
 });

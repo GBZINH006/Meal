@@ -1,5 +1,5 @@
 // src/screens/LoginScreen.js
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import global from "../styles/global";
 import RedButton from "../components/RedButton";
@@ -12,20 +12,16 @@ export default function LoginScreen({ navigation }) {
   const [matricula, setMatricula] = useState("");
   const [senha, setSenha] = useState("");
 
-  useEffect(() => {
-    // nada extra aqui; ADM senha vinda de StorageService quando necessário
-  }, []);
-
   async function loginAluno() {
-    if (!matricula.trim()) { Alert.alert("Erro", "Informe a matrícula"); return; }
-    const aluno = await StorageService.getAlunoByMatricula(matricula.trim());
+    const cleaned = matricula.trim();
+    if (!cleaned) { Alert.alert("Erro", "Informe a matrícula"); return; }
+    const aluno = await StorageService.getAlunoByMatricula(cleaned);
     if (!aluno) {
       Alert.alert("Não encontrado", "Matrícula não cadastrada. Peça ao ADM para cadastrar o aluno.");
       return;
     }
-    // aluno já contém nome, matricula, turma
     setUser({ type: "aluno", ...aluno });
-    navigation.replace("Aluno");
+    navigation.replace("Aluno", { aluno });
   }
 
   async function loginAdm() {
@@ -42,7 +38,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} style={[global.container, { justifyContent: "flex-start" }]}>
-      <ScrollView contentContainerStyle={{ paddingBottom: 40}}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 40 }}>
         <Text style={global.title}>Login</Text>
 
         <View style={{ flexDirection: "row", marginBottom: 16 }}>
